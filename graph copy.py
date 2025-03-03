@@ -2,19 +2,6 @@ import matplotlib.pyplot as plt
 
 
 class miner:
-    daily_complexity_rise = {
-        "ltc": ((27.4 - 8.7) / 8.7) / 2 / 365,
-        "aleo": 0,
-        "btn": ((507 - 200) / 200) / 2 / 365,
-        "btc": ((109 - 35) / 35) / 2 / 365,
-    }
-    daily_price_rise = {
-        "ltc": ((0.2 - 0.07) / 0.07) / 2 / 365,
-        "aleo": ((0.37 - 1.4) / 1.4) / 30 / 5,
-        "btn": ((453 - 6420) / 6420) / 365,
-        "btc": ((102 - 16) / 16) / 2 / 365,
-    }
-
     def __init__(self, power_watt, income_per_month_dol, cost, coin):
         self.power_watt = power_watt
         self.raw_income_per_day = income_per_month_dol / 30
@@ -24,12 +11,7 @@ class miner:
     def get_daily_income(self, electricity_bill_per_kw, day):
         return (
             self.raw_income_per_day
-            - self.power_watt
-            / 1000
-            * 24
-            * electricity_bill_per_kw
-            / (1 + self.daily_complexity_rise[self.coin] * day)
-            * (1 + self.daily_price_rise[self.coin] * day)
+            - self.power_watt / 1000 * 24 * electricity_bill_per_kw
         )
 
 
